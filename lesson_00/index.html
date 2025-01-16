@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 00</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const domContainer = document.querySelector("#root");
+      const root = ReactDOM.createRoot(domContainer);
+
+      const title = `Hello, world!`;
+      const heading = <h1>{title}</h1>;
+      const heading_2 = <h2>Heading 2</h2>;
+
+      const animals = [`cat`, `dog`, `lion`];
+      const items = [`one`, `two`, `three`];
+
+      const userAnthony = {
+        name: `Anthony`,
+        age: 20,
+      };
+      const users = [
+        {
+          id: 1,
+          name: `Anthony`,
+          age: 20,
+        },
+        {
+          id: 2,
+          name: `Tetiana`,
+          age: 100,
+        },
+        {
+          id: 3,
+          name: `Taras`,
+          age: 30,
+        },
+      ];
+
+      const STATUS_ERROR = `ERROR`;
+      const STATUS_SUCCESS = `SUCCESS`;
+      const STATUS_PENDING = `PENDING`;
+
+      const STATUS = {
+        ERROR: STATUS_ERROR,
+        SUCCESS: STATUS_SUCCESS,
+        PENDING: STATUS_PENDING
+      };
+
+      const titleInfo = {
+        text: `Hello, world`,
+        status: STATUS.ERROR,
+      };
+
+      const List = ({ list, color }) => {
+        const listStyles = {
+          color: color,
+          fontStyle: `italic`,
+        };
+
+        return Array.isArray(list) ? (
+          <ul style={listStyles}>
+            {list.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        ) : null;
+      };
+
+      const Title = ({title:{text, status}}) => {
+        let titleClass;
+        switch(status){
+            case STATUS_ERROR:
+                titleClass = `title--error`;
+                break;
+            case STATUS_SUCCESS:
+                titleClass = `title--success`;
+                break;
+            default:
+                titleClass = `title--pending`;
+                break;
+        }
+
+        return <h2 className={titleClass}>{text}</h2>;
+      };
+
+      const TitleList = ({ title, list }) => {
+        return (
+          <div className={'titleList'}>
+            <Title title={title} />
+            <List list={list} />
+          </div>
+        );
+      };
+
+      root.render(
+        <React.Fragment>
+          {heading}
+          {heading_2}
+
+          <ul>
+            {animals.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+
+          <ol>
+            {items.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ol>
+
+          <ul>
+            {Object.keys(userAnthony).map((item, index) => (
+              <li key={index}>
+                {item}: {userAnthony[item]}
+              </li>
+            ))}
+          </ul>
+
+          <ul>
+            {users
+              .map((user) => {
+                Object.defineProperty(user, "id", {
+                  enumerable: false,
+                });
+                return user;
+              })
+              .map((user) => (
+                <li key={user.id}>
+                  <ul>
+                    {Object.keys(user).map((item, index) => (
+                      <li key={index}>
+                        {item}: {user[item]}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+          </ul>
+
+          <List list={animals} color={`crimson`} />
+          <List />
+
+          <TitleList title={titleInfo} list={animals} />
+        </React.Fragment>
+      );
+    </script>
+  </body>
+</html>
