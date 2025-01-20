@@ -24,7 +24,27 @@
 
       const heading = <h1>Hello, world!</h1>
 
-      root.render(heading);
+      const children = [`Anna`, `Taras`];
+
+      const List = ({list, color}) => {
+
+        const listStyle = {color, fontStyle: `italic`};
+
+        const getClassName = () => {
+          let classes = [`list__item`];
+          color && color===`green` && classes.push(`list__item--success`);
+          return classes.join(` `);
+        }
+
+        return list ? <ul style={listStyle} className={getClassName()}>{list.map((item, index) => <li key={index}>{item}</li>)}</ul> : null;
+      }
+
+      root.render(<React.Fragment>
+        {heading}
+        <List list={[`tiger`, `cat`, `lion`]} color={`green`} />
+        <List list={children} />
+        <List />
+        </React.Fragment>);
     </script>
   </body>
 </html>
