@@ -1,13 +1,14 @@
 import React from "react";
-import Button from "./../Button/Button";
 
-export default function TodoItem({
-  item = {},
-  handleItemRemove,
+import Button from './../../Button/Button'
+
+export default function TodosItem({
+  item,
   handleItemCompleted,
+  handleItemDelete,
 }) {
   const getClassName = (item) => {
-    const classes = [];
+    const classes = [`item`];
     item.completed && classes.push(`item--completed`);
     return classes.join(` `);
   };
@@ -15,11 +16,10 @@ export default function TodoItem({
   return (
     <li
       className={getClassName(item)}
-      key={item.id}
       onClick={() => handleItemCompleted(item)}
     >
       {item.title}{" "}
-      <Button title={`Remove`} clickFn={(e) => handleItemRemove(e, item.id)} />
+      <Button title="Delete" handleClick={(e) => handleItemDelete(e, item.id)} />
     </li>
   );
 }

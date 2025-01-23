@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.sass";
 
-import Form from "./../Form/Form";
-import Filter from "./../Filter/Filter";
-import TodoList from "./../TodoList/TodoList";
+import service from "./../../services/todosAxios";
 
-import service from "./../../services/todos";
+import TodosItem from "./TodosItem/TodosItem";
+
+// CRUD – RDU
+// smart & dumb coomponents
 
 export default function Todos() {
   const [todos, setTodos] = useState([]);
-  const [filter, setFilter] = useState();
-
-  const addNewTodo = (todo) => setTodos((prevState) => [...prevState, todo]);
 
   const getTodos = async () => {
     try {
@@ -22,21 +20,26 @@ export default function Todos() {
     }
   };
 
-  const deleteTodoItem = async (id) => {
+  useEffect(() => {
+    getTodos();
+  }, []);
+
+  const handleItemDelete = async (e, id) => {
+    e.stopPropagation();
     try {
       await service.delete(id);
       setTodos((prevState) => prevState.filter((item) => item.id !== id));
+      // getTodos();
     } catch (err) {
       console.log(err);
     }
   };
 
-  const completeTodoItem = async (item) => {
+  const handleItemCompleted = async (item) => {
     try {
-      const response = await service.put(item.id, {
+      const response = await service.patch(item.id, {
         completed: !item.completed,
       });
-
       setTodos((prevState) =>
         prevState.map((element) => {
           if (element.id === response.id) element = response;
@@ -48,17 +51,16 @@ export default function Todos() {
     }
   };
 
-  return (
-    <>
-      <Form liftingNewTodo={addNewTodo} />
-      <Filter liftingFilter={setFilter} />
-      <TodoList
-        todos={todos}
-        getTodos={getTodos}
-        deleteTodoItem={deleteTodoItem}
-        completeTodoItem={completeTodoItem}
-        filter={filter}
-      />
-    </>
-  );
+  return todos.length ? (
+    <ul>
+      {todos.map((item) => (
+        <TodosItem
+          key={item.id}
+          item={item}
+          handleItemCompleted={handleItemCompleted}
+          handleItemDelete={handleItemDelete}
+        />
+      ))}
+    </ul>
+  ) : null;
 }
