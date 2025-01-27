@@ -1,10 +1,10 @@
 import React from "react";
 
-import TodosItem from "./../TodosItem/TodosItem";
+import TodosItem from "../TodosItem/TodosItem";
 
 export default function TodosList({
   todos,
-  completeItem,
+  completedItem,
   deleteItem,
 }) {
   return todos.length ? (
@@ -13,7 +13,7 @@ export default function TodosList({
         <TodosItem
           key={item.id}
           item={item}
-          completeItem={completeItem}
+          completedItem={completedItem}
           deleteItem={deleteItem}
         />
       ))}

@@ -9,14 +9,17 @@ import {
 export default function TodosFilter({liftingFilter}) {
   const [filter, setFilter] = useState(TODOS_FILTER_ALL);
 
-  const handleFilter = (e) => setFilter(e.target.value);
+  const handleSelect = (e) => {
+    setFilter(e.target.value);
+  };
 
   useEffect(() => {
+    //console.log(`in useEffect in TodosFilter Component`, filter);
     liftingFilter(filter);
-  }, [filter])
+  }, [filter]);
 
   return (
-    <select defaultValue={filter} onChange={handleFilter}>
+    <select onChange={handleSelect} defaultValue={filter}>
       <option value={TODOS_FILTER_ALL}>All</option>
       <option value={TODOS_FILTER_COMPLETED}>Completed</option>
       <option value={TODOS_FILTER_PROGRESS}>Progress</option>

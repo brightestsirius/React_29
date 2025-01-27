@@ -1,24 +1,53 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
-export default function TodosForm({ liftingTodo }) {
-  const formTitle = useRef();
-  const formCompleted = useRef();
+import service from "./../../../services/todosAxios";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    liftingTodo({
-      title: formTitle.current.value,
-      completed: formCompleted.current.checked,
+import { NEW_TODO_DEFAULT } from "../../../constants/todos";
+
+// lifting state up
+
+export default function TodosForm({liftingNewTodo}) {
+  const inputTitle = useRef();
+  const inputCompleted = useRef();
+  const formRef = useRef();
+
+  const [newTodo, setNewTodo] = useState(NEW_TODO_DEFAULT);
+
+  const handleFormTitle = (e) => {
+    setNewTodo((prevState) => ({ ...prevState, title: e.target.value }));
+  };
+
+  const handleFormCompleted = (e) => {
+    setNewTodo((prevState) => {
+      return { ...prevState, completed: e.target.checked };
     });
   };
 
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    liftingNewTodo(newTodo);
+  };
+
   return (
-    <form className="todos__form" onSubmit={handleSubmit}>
+    <form className="todo__form" onSubmit={handleFormSubmit} ref={formRef}>
       <label>
-        Title: <input type="text" ref={formTitle} />
+        Title{" "}
+        <input
+          type="text"
+          ref={inputTitle}
+          defaultValue={newTodo.title}
+          onChange={handleFormTitle}
+        />
       </label>
       <label>
-        Completed: <input type="checkbox" ref={formCompleted} />
+        Completed{" "}
+        <input
+          type="checkbox"
+          ref={inputCompleted}
+          defaultChecked={newTodo.completed}
+          onChange={handleFormCompleted}
+        />
       </label>
       <button>Add todo</button>
     </form>
