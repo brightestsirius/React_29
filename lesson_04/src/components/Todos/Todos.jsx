@@ -5,25 +5,21 @@ import TodosForm from "./TodosForm/TodosForm";
 import TodosFilter from "./TodosFilter/TodosFilter";
 import TodosList from "./TodosList/TodosList";
 
-import useTodos from "../../hooks/useTodos";
+import useTodo from "../../hooks/useTodo";
+import useTodoFilter from "../../hooks/useTodoFilter";
 
 export default function Todos() {
-  const {
-    filteredTodos,
-    setFilter,
-    handleItemDelete,
-    handleItemCompleted,
-    addNewTodo,
-  } = useTodos();
+  const { todos, deleteItem, completeItem, addNewTodo } = useTodo();
+  const { filteredTodos, setFilter } = useTodoFilter(todos);
 
   return (
     <>
-      <TodosForm liftingNewTodo={addNewTodo} />
+      <TodosForm liftingTodo={addNewTodo} />
       <TodosFilter liftingFilter={setFilter} />
       <TodosList
         todos={filteredTodos}
-        handleItemCompleted={handleItemCompleted}
-        handleItemDelete={handleItemDelete}
+        deleteItem={deleteItem}
+        completeItem={completeItem}
       />
     </>
   );

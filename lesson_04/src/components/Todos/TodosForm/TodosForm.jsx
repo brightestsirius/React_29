@@ -1,19 +1,19 @@
 import React, { useRef } from "react";
 
-export default function TodosForm({ liftingNewTodo }) {
+export default function TodosForm({ liftingTodo }) {
   const formTitle = useRef();
   const formCompleted = useRef();
 
-  const handleFormSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    liftingNewTodo({
+    liftingTodo({
       title: formTitle.current.value,
       completed: formCompleted.current.checked,
     });
   };
 
   return (
-    <form className="todos__form" onSubmit={handleFormSubmit}>
+    <form className="todos__form" onSubmit={handleSubmit}>
       <label>
         Title: <input type="text" ref={formTitle} />
       </label>
