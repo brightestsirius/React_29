@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 
-import DashboardContext from "../../../contexts/DashboardConext";
+import ListColorContext from "../../../contexts/ListColorContext";
 
 export default function ListItem({ item }) {
-  const { color } = useContext(DashboardContext);
+  const { color } = useContext(ListColorContext);
   return <li style={{ color }}>{item.title}</li>;
 }

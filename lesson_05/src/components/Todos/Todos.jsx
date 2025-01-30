@@ -5,8 +5,8 @@ import TodosForm from "./TodosForm/TodosForm";
 import TodosFilter from "./TodosFilter/TodosFilter";
 import TodosList from "./TodosList/TodosList";
 
-import useTodos from "./../../hooks/useTodos";
-import useTodosFilter from "./../../hooks/useTodosFilter";
+import useTodos from "../../hooks/useTodos";
+import useTodosFilter from "../../hooks/useTodosFilter";
 
 export default function Todos() {
   const { todos, addNewTodo, deleteItem, completedItem } = useTodos();

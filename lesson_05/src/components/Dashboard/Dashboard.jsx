@@ -1,35 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
+import Statistics from "./Statistics/Statistics";
+import ColorPicker from "./ColorPicker/ColorPicker";
 import List from "./List/List";
-import ListColorPicker from "./ListColorPicker/ListColorPicker";
-import ListStatistics from "./ListStatistics/ListStatistics";
 
-import service from "../../services/todosAxios";
-
-import DashboardContext from './../../contexts/DashboardConext'
+import ListContext from "../../contexts/ListContext";
+import ListColorContext from "../../contexts/ListColorContext";
 
 export default function Dashboard() {
   const [list, setList] = useState([]);
-  const [color, setColor] = useState(`#009688`);
-
-  const getList = async () => {
-    try {
-      const response = await service.get();
-      setList(response);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getList();
-  }, []);
+  const [color, setColor] = useState(`#9C27B0`);
 
   return (
-    <DashboardContext.Provider value={{list, color, setColor}}>
-      <ListStatistics />
-      <ListColorPicker />
-      <List />
-    </DashboardContext.Provider>
+    <ListContext.Provider value={ {list, setList} }>
+      <Statistics />
+
+      <ListColorContext.Provider value={{ color, setColor }}>
+        <ColorPicker />
+        <List />
+      </ListColorContext.Provider>
+    </ListContext.Provider>
   );
 }

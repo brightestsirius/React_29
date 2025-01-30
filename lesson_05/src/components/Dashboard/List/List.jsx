@@ -1,11 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
-import DashboardContext from "../../../contexts/DashboardConext";
+import service from "./../../../services/todosAxios";
 
 import ListItem from "./ListItem";
 
+import ListContext from "../../../contexts/ListContext";
+
 export default function List() {
-  const { list } = useContext(DashboardContext);
+  const {list, setList} = useContext(ListContext);
+
+  const getList = async () => {
+    try {
+      const response = await service.get();
+      setList(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getList();
+  }, []);
 
   return list.length ? (
     <ul>

@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 
-import DashboardContext from "../../../contexts/DashboardConext";
+import ListContext from "../../../contexts/ListContext";
 
-export default function ListStatistics() {
-  const { list } = useContext(DashboardContext);
+export default function Statistics() {
+  const { list } = useContext(ListContext);
+
   return (
     <ul>
       <li>All: {list.length}</li>

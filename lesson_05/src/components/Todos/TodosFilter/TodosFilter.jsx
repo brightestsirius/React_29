@@ -14,6 +14,7 @@ export default function TodosFilter({liftingFilter}) {
   };
 
   useEffect(() => {
+    //console.log(`in useEffect in TodosFilter Component`, filter);
     liftingFilter(filter);
   }, [filter]);
 

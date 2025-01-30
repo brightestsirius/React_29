@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 
-import DashboardContext from "./../../../contexts/DashboardConext";
+import ListColorContext from "../../../contexts/ListColorContext";
 
-export default function ListColorPicker() {
-  const { color, setColor } = useContext(DashboardContext);
+export default function ColorPicker() {
+  const {color, setColor} = useContext(ListColorContext);
 
   const handleColor = (e) => setColor(e.target.value);
 
