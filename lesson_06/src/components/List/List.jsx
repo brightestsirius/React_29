@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import service from "../../services/todos";
 
+import ListItem from "./ListItem";
+
 export default function List() {
   const [list, setList] = useState([]);
 
@@ -14,6 +16,15 @@ export default function List() {
     }
   };
 
+  const deleteItem = async (id) => {
+    try {
+      await service.delete(id);
+      getList();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getList();
   }, []);
@@ -21,7 +32,7 @@ export default function List() {
   return list.length ? (
     <ul>
       {list.map((item) => (
-        <li key={item.id}>{item.title}</li>
+        <ListItem key={item.id} item={item} deleteItem={deleteItem} />
       ))}
     </ul>
   ) : null;
