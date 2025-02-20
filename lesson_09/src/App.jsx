@@ -2,15 +2,16 @@ import React, { lazy, useState } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Layout from "./pages/Layout";
-import UserGuard from "./HOC/UserGuard";
-import ErrorRoute from "./routes/ErrorRoute";
-
-import AppContext from "./contexts/AppContext";
 
 const HomeRouteLazy = lazy(() => import("./routes/HomeRoute"));
 const TodosRouteLazy = lazy(() => import("./routes/TodosRoute"));
 const TodoRouteLazy = lazy(() => import("./routes/TodoRoute"));
+const ErrorRouteLazy = lazy(() => import("./routes/ErrorRoute"));
 const AdminRouteLazy = lazy(() => import("./routes/AdminRoute"));
+
+import AuthGuard from "./HOC/AuthGuard";
+
+import AppContext from "./contexts/AppContext";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -30,18 +31,22 @@ export default function App() {
         },
         {
           path: `todos/:id`,
-          element: <TodoRouteLazy />,
+          element: (
+            <AuthGuard>
+              <TodoRouteLazy />
+            </AuthGuard>
+          ),
         },
         {
           path: `admin`,
           element: (
-            <UserGuard>
+            <AuthGuard>
               <AdminRouteLazy />
-            </UserGuard>
+            </AuthGuard>
           ),
         },
       ],
-      errorElement: <ErrorRoute />,
+      errorElement: <ErrorRouteLazy />,
     },
   ]);
 

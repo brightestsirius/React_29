@@ -14,7 +14,7 @@ export default function Select() {
         <option value={SORT_ASC}>{SORT_ASC}</option>
         <option value={SORT_DESC}>{SORT_DESC}</option>
       </select>
-
+      <br></br><br></br>
       <Link to={`/todos?sort=${sort}`}>Todos sort by {sort}</Link>
     </>
   );

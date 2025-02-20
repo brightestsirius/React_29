@@ -1,20 +1,18 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
 import Header from "./Header/Header";
+import Loading from '././../components/Loading/Loading'
 
 export default function Layout() {
   const location = useLocation();
-
-  useEffect(() => {
-    console.log(location, location.state);
-  }, [location]);
+  //console.log(location);
 
   return (
     <>
       <Header />
       <main>
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<Loading />}>
           <Outlet />
         </Suspense>
       </main>

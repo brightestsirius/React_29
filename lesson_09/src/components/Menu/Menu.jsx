@@ -1,9 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import styles from './style.module.sass';
 
 export default function Menu() {
   const linkStyle = (value) => {
-    return value.isActive ? `nav--active` : null;
+    return value.isActive ? styles["nav--active"] : null;
   };
 
   const routes = [

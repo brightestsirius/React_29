@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useSearchParams, useLocation } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import service from "./../../services/todos";
 
@@ -8,7 +8,6 @@ import { SORT_ASC, SORT_DESC } from './../../constants/sort'
 export default function TodosList() {
   const [todos, setTodos] = useState([]);
   const [sortedTodos, setSortedTodos] = useState([]);
-  const location = useLocation();
 
   const [searchParams] = useSearchParams();
   const sort = searchParams.get(`sort`);
@@ -29,10 +28,6 @@ export default function TodosList() {
   useEffect(() => {
     setSortedTodos(todos);
   }, [todos]);
-
-  useEffect(() => {
-    console.log(location.state);
-  }, [location])
 
   useEffect(()=>{
     switch(sort){
