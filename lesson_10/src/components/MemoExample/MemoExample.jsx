@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 
 import ColorPicker from "./ColorPicker/ColorPicker";
 import List from "./List/List";
@@ -9,10 +9,7 @@ export default function MemoExample() {
   const [listInit, setList] = useState([]);
   const [color, setColor] = useState(`#ed143d`);
 
-  const list = useMemo(
-    () => listInit.sort((a, b) => b.completed - a.completed),
-    [listInit]
-  );
+  const list = listInit.sort((a, b) => b.completed - a.completed);
 
   const getList = async () => {
     try {

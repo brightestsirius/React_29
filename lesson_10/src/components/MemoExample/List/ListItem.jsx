@@ -1,14 +1,16 @@
 import React from "react";
 
-export default function ListItem({ item, listItemCompleted, color }) {
+import Button from "./../Button/Button";
+
+export default function ListItem({ item, listItemCompleted }) {
   console.log(`📋 in ListItem`);
 
   return (
     <li
-      style={{ color: item.completed && color }}
+      style={{ textDecoration: item.completed && `underline` }}
       onClick={() => listItemCompleted(item)}
     >
-      {item.title}
+      {item.title} <Button />
     </li>
   );
 }
