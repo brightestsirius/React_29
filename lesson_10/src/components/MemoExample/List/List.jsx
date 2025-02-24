@@ -1,17 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 
-import MemoContext from "../../../contexts/MemoContext";
 import ListItem from "./ListItem";
 
-export default function List() {
+export default function List({ list, listItemCompleted, color }) {
   console.log(`📕 in List`);
-
-  const { list } = useContext(MemoContext);
 
   return list.length ? (
     <ul>
       {list.map((item) => (
-        <ListItem key={item.id} item={item} />
+        <ListItem
+          key={item.id}
+          item={item}
+          listItemCompleted={listItemCompleted}
+          color={color}
+        />
       ))}
     </ul>
   ) : null;

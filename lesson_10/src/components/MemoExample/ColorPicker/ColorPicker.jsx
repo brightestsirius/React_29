@@ -1,10 +1,7 @@
-import React, { useContext } from "react";
+import React, { memo } from "react";
 
-import MemoContext from "./../../../contexts/MemoContext";
-
-export default function ColorPicker() {
+export default function ColorPicker({ color, setColor }) {
   console.log(`🎨 in ColorPicker`);
-  const { color, setColor } = useContext(MemoContext);
 
   const handleColor = (e) => setColor(e.target.value);
 

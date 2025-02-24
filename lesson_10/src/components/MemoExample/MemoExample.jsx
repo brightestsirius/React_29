@@ -3,8 +3,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import ColorPicker from "./ColorPicker/ColorPicker";
 import List from "./List/List";
 
-import MemoContext from "./../../contexts/MemoContext";
-
 import service from "../../services/list";
 
 export default function MemoExample() {
@@ -39,11 +37,9 @@ export default function MemoExample() {
   }, []);
 
   return (
-    <MemoContext.Provider
-      value={{ list, setList, listItemCompleted, color, setColor }}
-    >
-      <ColorPicker />
-      <List />
-    </MemoContext.Provider>
+    <>
+      <ColorPicker color={color} setColor={setColor} />
+      <List list={list} listItemCompleted={listItemCompleted} color={color} />
+    </>
   );
 }

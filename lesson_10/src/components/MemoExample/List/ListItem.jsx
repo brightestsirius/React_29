@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 
-import MemoContext from "../../../contexts/MemoContext";
-
-export default function ListItem({ item }) {
+export default function ListItem({ item, listItemCompleted, color }) {
   console.log(`📋 in ListItem`);
-  const { color, listItemCompleted } = useContext(MemoContext);
+
   return (
     <li
       style={{ color: item.completed && color }}
