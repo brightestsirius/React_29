@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 
 export default function ColorPicker({ color, setColor }) {
   console.log(`🎨 in ColorPicker`);
