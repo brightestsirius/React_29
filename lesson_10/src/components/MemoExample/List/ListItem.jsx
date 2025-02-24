@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 
 import Button from "./../Button/Button";
 
-export default function ListItem({ item, listItemCompleted }) {
+export default memo(function ListItem({ item, listItemCompleted }) {
   console.log(`📋 in ListItem`);
 
   return (
@@ -13,4 +13,4 @@ export default function ListItem({ item, listItemCompleted }) {
       {item.title} <Button />
     </li>
   );
-}
+});

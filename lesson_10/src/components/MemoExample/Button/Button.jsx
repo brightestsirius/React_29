@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default function Button() {
+export default memo(function Button() {
   console.log(`🟣 in Button`);
   return <button>Button</button>;
-}
+});
