@@ -1,14 +1,16 @@
 import React from "react";
-import BearInfo from "./components/BearInfo/BearInfo";
-import BearCounter from "./components/BearCounter/BearCounter";
+
+import Features from "./components/Features/Features";
+import Statistics from "./components/Statistics/Statistics";
+import Bears from "./components/Bears/Bears";
 import Users from "./components/Users/Users";
 
 export default function App() {
   return (
     <>
-      <BearCounter />
-      <hr />
-      <BearInfo />
+      <Features />
+      <Statistics />
+      <Bears />
       <hr />
       <Users />
     </>

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const useUsersStore = create((set) => ({
+const useStoreUsers = create((set) => ({
   users: [],
   fetchUsers: async () => {
     try {
@@ -13,4 +13,5 @@ const useUsersStore = create((set) => ({
     }
   },
 }));
-export default useUsersStore;
+
+export default useStoreUsers;
