@@ -14,11 +14,10 @@ describe("Accordion", () => {
     })
 
     test("should not show the content at the start", () => {
-
         expect(screen.queryByText(/Content/i)).not.toBeInTheDocument();
     })
 
-    test("should show the content on accordion click",async () => {
+    test("should show the content on accordion click", async () => {
 
         const title = screen.getByText(/Show/i);
         fireEvent.click(title)

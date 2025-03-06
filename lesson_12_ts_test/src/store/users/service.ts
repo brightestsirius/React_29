@@ -4,21 +4,18 @@ import type { IUser } from './types'
 export const usersApi = createApi({
     reducerPath: 'usersApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://679286cdcf994cc6804a5368.mockapi.io/' }),
-    tagTypes: ['User'],
+    tagTypes: ['Users'],
     endpoints: (builder) => ({
         getUsers: builder.query<IUser[], void>({
             query: () => `users`,
-            providesTags: (result, error, arg) =>
-                result
-                    ? [...result.map(({ id }) => ({ type: 'User' as const, id })), 'User']
-                    : ['User'],
+            providesTags: ['Users']
         }),
         deleteUser: builder.mutation<IUser, string>({
             query: (id) => ({
                 url: `users/${id}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: ['User'],
+            invalidatesTags: ['Users'],
         }),
     }),
 })

@@ -4,8 +4,9 @@ let booleanValue: boolean = true;
 let undefinedValue: undefined = undefined;
 let nullValue: null = null;
 
-type maybeString = string | number | undefined;
+let Oleg: (string | boolean) = `10`; 
 
+type maybeString = string | number | undefined;
 let userId: maybeString = `10`;
 
 let userMonth: any = `sept`;
@@ -17,7 +18,8 @@ let ids: (maybeString)[] = [10, `10`, undefined];
 
 interface Animal{
     type: string,
-    name: string
+    name: string,
+    children?: IUser[],
 }
 
 enum REST {

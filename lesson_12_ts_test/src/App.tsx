@@ -9,6 +9,7 @@ export default function App() {
       <Accordion title="Some title">
         <p>Some description</p>
       </Accordion>
+      
       <UsersList />
     </>
   )

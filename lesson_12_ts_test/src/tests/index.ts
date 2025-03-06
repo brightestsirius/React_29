@@ -2,7 +2,7 @@ import { unknownType, IUser } from './../types/types';
 import { DEFAULT_USER } from './mockedData'
 import { convertToNumber } from './../utils/utils'
 
-const sum = (a: number, b?: unknownType): unknownType => {
+const sum = (a: number, b?: unknownType): number => {
     if (b) return convertToNumber(a) + convertToNumber(b);
     else return convertToNumber(a);
 }
