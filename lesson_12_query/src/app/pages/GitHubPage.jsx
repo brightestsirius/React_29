@@ -1,5 +1,5 @@
 import React from "react";
-import GitHubRepos from "../modules/GitHub/GitHubRepos";
+import GitHubRepos from "./../../modules/GitHub/GitHubRepos";
 
 const GitHubPage = () => {
   return (
